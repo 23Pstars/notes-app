@@ -41,10 +41,13 @@ class NotesService {
 
   editNoteById(id, { title, body, tags }) {
     const index = this._notes.findIndex((note) => note.id === id);
+
     if (index === -1) {
       throw new NotFoundError('Gagal memperbarui catatan. Id tidak ditemukan');
     }
+
     const updatedAt = new Date().toISOString();
+
     this._notes[index] = {
       ...this._notes[index],
       title,
@@ -57,7 +60,7 @@ class NotesService {
   deleteNoteById(id) {
     const index = this._notes.findIndex((note) => note.id === id);
     if (index === -1) {
-      throw new NotFoundError('Gagal memperbarui catatan. Id tidak ditemukan');
+      throw new NotFoundError('Catatan gagal dihapus. Id tidak ditemukan');
     }
     this._notes.splice(index, 1);
   }
